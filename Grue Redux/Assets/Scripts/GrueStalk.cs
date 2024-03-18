@@ -11,9 +11,17 @@ public class GrueStalk : MonoBehaviour
     public bool LightUp = false;
     public float playerDist;
     public AudioSource grueSound;
+    public GameObject LoserDark;
+    public SpriteRenderer LoserDarkSR;
+    public GameObject JumpscareBlocker;
+    public GameObject Music;
     void Start()
     {
         Player = GameObject.Find("Player");
+        LoserDark = GameObject.Find("LoserDarkness");
+        JumpscareBlocker = GameObject.Find("JumpscareBlocker");
+        Music = GameObject.Find("Music");
+        LoserDarkSR = LoserDark.GetComponent<SpriteRenderer>();
         grueSound = GetComponent<AudioSource>();
         StartCoroutine(EndGame());
     }
@@ -44,7 +52,17 @@ public class GrueStalk : MonoBehaviour
     public IEnumerator EndGame()
     {
         yield return new WaitForSeconds(100);
-        SceneManager.LoadScene(2);
+        Destroy(grueSound);
+        transform.position = new Vector2(999999, 999999);
+        Destroy(this);
+    }
+
+    public IEnumerator KillPlayer()
+    {
+        Destroy(Music);
+        Destroy(grueSound);
+        yield return new WaitForSeconds(Random.Range(5,10));
+        Destroy(JumpscareBlocker);
     }
 
     void FixedUpdate()
@@ -76,7 +94,9 @@ public class GrueStalk : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            SceneManager.LoadScene(1);
+            LoserDarkSR.enabled = true;
+            transform.position = new Vector2(9999999999, 999999999999);
+            StartCoroutine(KillPlayer());
         }
     }
 }

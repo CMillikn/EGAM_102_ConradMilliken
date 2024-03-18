@@ -5,6 +5,7 @@ using UnityEngine;
 public class LightFollow : MonoBehaviour
 {
     public GameObject Player;
+
     void Awake()
     {
         Player = GameObject.Find("Player");

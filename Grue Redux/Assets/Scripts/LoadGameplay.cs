@@ -14,6 +14,6 @@ public class LoadGameplay : MonoBehaviour
 
     public void ButtonPressed()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }

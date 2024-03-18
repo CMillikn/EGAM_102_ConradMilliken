@@ -15,9 +15,9 @@ TagManager:
   - Monster
   - Player
   - Wall
-  - 
-  - 
-  - 
+  - JumpscareCatcher
+  - JumpscareBlocker
+  - Jumpscare
   - 
   - 
   - 
@@ -39,6 +39,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Floor
+    uniqueID: 2782376895
+    locked: 0
+  - name: Particle Layer
+    uniqueID: 2034251563
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3486653841
     locked: 0

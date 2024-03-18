@@ -7,6 +7,8 @@ public class DarknessFollow : MonoBehaviour
     public GameObject Player;
     public float intensity;
     public float increase;
+    public LightSpread LightSpread;
+    public LanternGrounded LanternGrounded;
     void Awake()
     {
         Player = GameObject.Find("Player");
@@ -15,24 +17,51 @@ public class DarknessFollow : MonoBehaviour
     void FixedUpdate()
     {
         this.transform.position = Player.transform.position; 
-        if (Input.GetKey(KeyCode.Space))
+        if (LightSpread.LightMeter > 0)
         {
-            if (intensity < 6)
             {
-                intensity = intensity + increase;
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    if (intensity < 8)
+                    { 
+                        if (LanternGrounded.IsGrounded == false)
+                        {
+                            intensity = intensity + increase;
+                        }
+                    }
+                }
+                else
+                {
+                    if (intensity > 3f)
+                    {
+                    intensity = intensity - increase;
+                    }
+                }
+                this.transform.localScale = new Vector2(intensity, intensity);
+                if (intensity < 3)
+                {
+                    if (LanternGrounded == false)
+                        {
+                            intensity = 3f;
+                        }
+                }
+            }
+            if (LanternGrounded.IsGrounded == true)
+            {
+                if (intensity > 1)
+                {
+                    intensity = 1;
+                    this.transform.localScale = new Vector2(intensity, intensity);
+                }
             }
         }
         else
         {
-            if (intensity > 3f)
+            if (intensity > 1f)
             {
-                intensity = intensity - increase;
+                intensity = 1f;
+                this.transform.localScale = new Vector2(intensity, intensity);
             }
-        }
-        this.transform.localScale = new Vector2(intensity, intensity);
-        if (intensity < 3)
-        {
-            intensity = 3f;
         }
     }
 }
